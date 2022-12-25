@@ -11,4 +11,29 @@ html {
 body {
     width: 100vw;
     height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+      'header'
+      'main'
+      'footer';
+}
+
+header {
+    grid-area: header;
+    background-color: #bfdbfe;
+    padding: 10px;
+}
+
+main {
+    grid-area: main;
+    background-color: #e0f2fe;
+    padding: 10px;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #bfdbfe;
+    padding: 10px;
 }

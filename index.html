@@ -6,20 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Library</title>
 </head>
 <body>
     <header>
-        <h1>Sshhh! This is a library.</h1>
+        <h1>Library</h1>
     </header>
     <main>
-        <h2>Books</h2>
-        <table id="booksTable">
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-            </tr>
-          </table>
+        <div class="library-container">
+            <div class="tableGroup">
+                <h2>Books</h2>
+                <table id="booksTable">
+                    <tr>
+                      <th>Title</th>
+                      <th>Author</th>
+                      <th>Pages</th>
+                      <th>Read</th>
+                    </tr>
+                  </table>
+            </div>
+            <div class="buttonGroup">
+                <button class="open-button" onclick="openForm()">+ Add Book</button>
+            </div>
+        </div>
+        <div class="form-popup" id="myForm">
+            <form action="/action_page.php" class="form-container">
+              <h1>Add Book</h1>
+          
+              <label for="title"><b>Title</b></label>
+              <input type="text" placeholder="Enter Title" name="title" required>
+          
+              <label for="author"><b>Author</b></label>
+              <input type="text" placeholder="Enter Author" name="author" required>
+          
+              <button type="submit" class="btn">+</button>
+              <button type="button" class="btn cancel" onclick="closeForm()">x</button>
+            </form>
+          </div>
     </main>
     <footer>Jedeco</footer>
 </body>

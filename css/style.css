@@ -24,12 +24,16 @@ header {
     grid-area: header;
     background-color: #bfdbfe;
     padding: 10px;
+    text-align: center;
 }
 
 main {
     grid-area: main;
     background-color: #e0f2fe;
     padding: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
 }
 
 footer {
@@ -37,3 +41,4 @@ footer {
     background-color: #bfdbfe;
     padding: 10px;
 }
+

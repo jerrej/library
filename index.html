@@ -13,38 +13,34 @@
         <h1>Library</h1>
     </header>
     <main>
-        <div class="library-container">
-            <div class="tableGroup">
-                <h2>Books</h2>
-                <table id="booksTable">
-                    <tr>
-                      <th>Title</th>
-                      <th>Author</th>
-                      <th>Pages</th>
-                      <th>Read</th>
-                    </tr>
-                  </table>
-            </div>
-            <div class="buttonGroup">
-                <button class="open-button" onclick="openForm()">+ Add Book</button>
-            </div>
+        <div class="table">
+            <table id="booksTbl">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Read</th>
+                </tr>
+                </table>
         </div>
-        <div class="form-popup" id="myForm">
-            <form action="/action_page.php" class="form-container">
-              <h1>Add Book</h1>
-          
-              <label for="title"><b>Title</b></label>
-              <input type="text" placeholder="Enter Title" name="title" required>
-          
-              <label for="author"><b>Author</b></label>
-              <input type="text" placeholder="Enter Author" name="author" required>
-          
-              <button type="submit" class="btn">+</button>
-              <button type="button" class="btn cancel" onclick="closeForm()">x</button>
-            </form>
-          </div>
+        <section class="modal hidden">
+            <div class="modal-header">
+              <h4>Add a new book to your library</h4>
+              <button class="btn-close">⨉</button>
+            </div>
+            <input type="text" id="bookTitle" placeholder="Title" />
+            <input type="text" id="bookAuthor" placeholder="Author" />
+            <input type="number" id="bookPages" placeholder="# Amount of pages" />
+            <p><label for="bookIsRead">Have you read it?</label>
+            <input type="checkbox" id="bookIsRead" name="bookIsRead"></p>
+            <button class="btn btn-submit">Submit</button>
+          </section>
+        <div class="button">
+            <button class="btn btn-open">+ Add book</button>
+        </div>
     </main>
     <footer>Jedeco</footer>
+    <div class="overlay hidden"></div>
 </body>
 </html>
 <script src="js/script.js"></script>

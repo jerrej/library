@@ -69,12 +69,11 @@ function createTableRow(book, index) {
   pages.textContent = book.pages;
   isRead.textContent = book.isRead;
   readBtn.textContent = "Read";
-  readBtn.setAttribute("value", index)
   readBtn.onclick = toggleRead;
   removeBtn.textContent = "Remove";
-  removeBtn.setAttribute("value", index)
   removeBtn.onclick = removeBook;
   
+  buttonGroup.setAttribute("value", index)
   buttonGroup.appendChild(readBtn);
   buttonGroup.appendChild(removeBtn);
 
@@ -132,17 +131,15 @@ function addBook(e) {
 }
 
 function removeBook(e) {
-
-  const indexOfBook = e.target.value; 
-  library.removeBook(indexOfBook);
+  
+  library.removeBook(e.target.parentElement.getAttribute('value'));
   refreshTable();
  
 }
 
 function toggleRead(e) {
 
-  const indexOfBook = e.target.value;
-  library.toggleRead(indexOfBook);
+  library.toggleRead(e.target.parentElement.getAttribute('value'));
   refreshTable();
 
 }

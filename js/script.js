@@ -14,8 +14,20 @@ class Library {
     this.books = [];
   }
 
+  getBook(index) {
+    return this.books[index];
+  }
+
   addBook(book) {
     this.books.push(book);
+  }
+
+  removeBook(index) {
+    this.books.splice(index,1)
+  }
+  
+  toggleRead(index) {
+    this.books[index].isRead = !this.books[index].isRead
   }
 }
 
@@ -24,13 +36,13 @@ const library = new Library()
 // DOM Element Declarations
 
 const booksTbl = document.querySelector("#booksTbl");
-const addBookBtn = document.querySelector("#addBookBtn");
 const addBookFrm = document.querySelector("#addBookFrm");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const openModalBtn = document.querySelector(".btn-open");
 const closeModalBtn = document.querySelector(".btn-close");
 const submitBtn = document.querySelector(".btn-submit");
+
 
 // Dummy Data
 
@@ -41,28 +53,37 @@ library.addBook(new Book("Fire & Blood", "George R.R. Martin", 80, true));
 
 // Functions
 
-function createTableRow(book, id) {
+function createTableRow(book, index) {
 
   const tableRow = document.createElement('tr');
-  const rowTitle = document.createElement('td');
-  const rowAuthor = document.createElement('td');
-  const rowPages = document.createElement('td');
-  const rowIsRead = document.createElement('td');
-  const rowDelete = document.createElement('td');
-  const deleteBtn = document.createElement('button');
+  const title = document.createElement('td');
+  const author = document.createElement('td');
+  const pages = document.createElement('td');
+  const isRead = document.createElement('td');
+  const buttonGroup = document.createElement('td');
+  const readBtn = document.createElement('button');
+  const removeBtn = document.createElement('button');
 
-  rowTitle.textContent = book.title;
-  rowAuthor.textContent = book.author;
-  rowPages.textContent = book.pages;
-  rowIsRead.textContent = book.isRead;
-  deleteBtn.textContent = "Delete" + id; 
-  rowDelete.appendChild(deleteBtn);
+  title.textContent = book.title;
+  author.textContent = book.author;
+  pages.textContent = book.pages;
+  isRead.textContent = book.isRead;
+  readBtn.textContent = "Read";
+  readBtn.setAttribute("value", index)
+  readBtn.onclick = toggleRead;
+  removeBtn.textContent = "Remove";
+  removeBtn.setAttribute("value", index)
+  removeBtn.onclick = removeBook;
+  
+  buttonGroup.appendChild(readBtn);
+  buttonGroup.appendChild(removeBtn);
 
-  tableRow.appendChild(rowTitle);
-  tableRow.appendChild(rowAuthor);
-  tableRow.appendChild(rowPages);
-  tableRow.appendChild(rowIsRead);
-  tableRow.appendChild(rowDelete);
+  tableRow.appendChild(title);
+  tableRow.appendChild(author);
+  tableRow.appendChild(pages);
+  tableRow.appendChild(isRead);
+  tableRow.appendChild(buttonGroup);
+
   booksTbl.appendChild(tableRow);
 
 }
@@ -73,6 +94,7 @@ function openModal() {
   overlay.classList.remove("hidden");
 
 }
+
 function closeModal() {
 
   modal.classList.add("hidden");
@@ -80,7 +102,7 @@ function closeModal() {
 
 }
 
-function getAddBookInput() {
+function getBookInput() {
 
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -90,22 +112,20 @@ function getAddBookInput() {
 
 }
 
-
 function refreshTable() {
 
   booksTbl.textContent = "";
   for (let book of library.books) {
-    console.log(book.title);
-    console.log(library.books.indexOf(book))
-    createTableRow(book, library.books.indexOf(book));
+    const indexOfBook = library.books.indexOf(book);
+    createTableRow(book, indexOfBook);
   }
-    
+
 }
 
 function addBook(e) {
-  
+
   e.preventDefault();
-  const newBook = getAddBookInput()
+  const newBook = getBookInput()
   library.addBook(newBook)
   closeModal();
   refreshTable();
@@ -113,8 +133,19 @@ function addBook(e) {
 }
 
 function removeBook(e) {
-  console.log(e.value); 
-  //library.removeBook(book)
+
+  const indexOfBook = e.target.value; 
+  library.removeBook(indexOfBook);
+  refreshTable();
+ 
+}
+
+function toggleRead(e) {
+
+  const indexOfBook = e.target.value;
+  library.toggleRead(indexOfBook);
+  console.log(library.getBook(indexOfBook))
+  refreshTable();
 
 }
 
@@ -124,12 +155,11 @@ openModalBtn.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 addBookFrm.onsubmit = addBook;
-//deleteBtn.onclick = removeBook;
 
 
 // Load Page
 
-refreshTable()
+refreshTable();
 
-
-console.log("End of javascript reached");
+// End
+console.log("End of javascript");

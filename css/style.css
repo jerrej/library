@@ -113,6 +113,11 @@ button {
     justify-content: space-between;
 }
 
+.modal form {
+    display: inherit;
+    flex-flow: inherit;
+}
+
 .overlay {
     position: fixed;
     top: 0;

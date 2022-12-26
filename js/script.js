@@ -23,12 +23,13 @@ class Library {
 
 const library = new Library()
 const booksTbl = document.querySelector("#booksTbl");
-const addBookFrm = document.querySelector("#addBookFrm");
 const addBookBtn = document.querySelector("#addBookBtn");
+const addBookFrm = document.querySelector("#addBookFrm");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const openModalBtn = document.querySelector(".btn-open");
 const closeModalBtn = document.querySelector(".btn-close");
+const submitBtn = document.querySelector(".btn-submit");
 
 // Dummy Data
 
@@ -46,43 +47,84 @@ function createTableRow(book) {
   const rowAuthor = document.createElement('td');
   const rowPages = document.createElement('td');
   const rowIsRead = document.createElement('td');
+  const rowDelete = document.createElement('td');
+  const deleteBtn = document.createElement('button');
 
   rowTitle.textContent = book.title;
   rowAuthor.textContent = book.author;
   rowPages.textContent = book.pages;
   rowIsRead.textContent = book.isRead;
+  deleteBtn.textContent = "Delete";
+  rowDelete.appendChild(deleteBtn);
 
   tableRow.appendChild(rowTitle);
   tableRow.appendChild(rowAuthor);
   tableRow.appendChild(rowPages);
   tableRow.appendChild(rowIsRead);
+  tableRow.appendChild(rowDelete);
   booksTbl.appendChild(tableRow);
 
 }
 
-const openModal = function () {
+function openModal() {
+
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
+
 }
-const closeModal = function () {
+function closeModal() {
+
   modal.classList.add("hidden");
   overlay.classList.add("hidden");
-};
+
+}
+
+function getBookFromInput() {
+
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const pages = document.getElementById('pages').value;
+  const isRead = document.getElementById('isRead').checked;
+  return new Book(title, author, pages, isRead);
+
+}
+
+
+function refreshTable() {
+
+  booksTbl.textContent = "";
+  for (let book of library.books) {
+    console.log(book.title);
+    createTableRow(book);
+  }
+    
+}
+
+function addBook(e) {
+  
+  e.preventDefault();
+  const newBook = getBookFromInput()
+  library.addBook(newBook)
+  closeModal();
+  refreshTable();
+
+}
+
+function removeBook(e) {
+
+}
 
 // Event Listeners
 
 openModalBtn.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+addBookFrm.onsubmit = addBook;
 
 
 // Load Page
 
-for (let book of library.books) {
-  console.log(book.title);
-  createTableRow(book);
-}
+refreshTable()
 
-closeModal;
 
 console.log("End of javascript reached");

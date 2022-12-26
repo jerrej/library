@@ -114,10 +114,9 @@ function getBookInput() {
 
 function refreshTable() {
 
-  booksTbl.textContent = "";
+  booksTbl.textContent = '';
   for (let book of library.books) {
-    const indexOfBook = library.books.indexOf(book);
-    createTableRow(book, indexOfBook);
+    createTableRow(book, library.books.indexOf(book));
   }
 
 }
@@ -144,7 +143,6 @@ function toggleRead(e) {
 
   const indexOfBook = e.target.value;
   library.toggleRead(indexOfBook);
-  console.log(library.getBook(indexOfBook))
   refreshTable();
 
 }

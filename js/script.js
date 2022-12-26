@@ -19,9 +19,10 @@ class Library {
   }
 }
 
-// Declarations
-
 const library = new Library()
+
+// DOM Element Declarations
+
 const booksTbl = document.querySelector("#booksTbl");
 const addBookBtn = document.querySelector("#addBookBtn");
 const addBookFrm = document.querySelector("#addBookFrm");
@@ -36,11 +37,11 @@ const submitBtn = document.querySelector(".btn-submit");
 library.addBook(new Book("Brave New World", "Aldous Huxley", 50, false));
 library.addBook(new Book("Nineteen Eighy-Four", "George Orwell", 60, false));
 library.addBook(new Book("Mort", "Terry Pratchett", 70, false));
-library.addBook(new Book("Fire & Blood", "George R.R. Martin", 80, false));
+library.addBook(new Book("Fire & Blood", "George R.R. Martin", 80, true));
 
 // Functions
 
-function createTableRow(book) {
+function createTableRow(book, id) {
 
   const tableRow = document.createElement('tr');
   const rowTitle = document.createElement('td');
@@ -54,7 +55,7 @@ function createTableRow(book) {
   rowAuthor.textContent = book.author;
   rowPages.textContent = book.pages;
   rowIsRead.textContent = book.isRead;
-  deleteBtn.textContent = "Delete";
+  deleteBtn.textContent = "Delete" + id; 
   rowDelete.appendChild(deleteBtn);
 
   tableRow.appendChild(rowTitle);
@@ -79,7 +80,7 @@ function closeModal() {
 
 }
 
-function getBookFromInput() {
+function getAddBookInput() {
 
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -95,7 +96,8 @@ function refreshTable() {
   booksTbl.textContent = "";
   for (let book of library.books) {
     console.log(book.title);
-    createTableRow(book);
+    console.log(library.books.indexOf(book))
+    createTableRow(book, library.books.indexOf(book));
   }
     
 }
@@ -103,7 +105,7 @@ function refreshTable() {
 function addBook(e) {
   
   e.preventDefault();
-  const newBook = getBookFromInput()
+  const newBook = getAddBookInput()
   library.addBook(newBook)
   closeModal();
   refreshTable();
@@ -111,6 +113,8 @@ function addBook(e) {
 }
 
 function removeBook(e) {
+  console.log(e.value); 
+  //library.removeBook(book)
 
 }
 
@@ -120,6 +124,7 @@ openModalBtn.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 addBookFrm.onsubmit = addBook;
+//deleteBtn.onclick = removeBook;
 
 
 // Load Page

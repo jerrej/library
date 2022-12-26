@@ -53,7 +53,11 @@ footer {
 table,
 th,
 td {
-    border: 1px solid;
+    border: 1px solid black;
+}
+
+td, th {
+    padding: 10px;
 }
 
 table {
@@ -73,14 +77,14 @@ button {
 }
 
 .btn-close {
-    transform: translate(10px, -30px);
+    transform: translate(10px, -20px);
     padding: 0.5rem 0.8rem;
     background-color: #fff;
     border-radius: 50%;
 }
 
 .btn-submit {
-    background-color: #1e3a8a;
+    background-color: #3b82f6;
     color: #fff;
     padding: 0.5rem;
 }

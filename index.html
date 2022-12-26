@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,14 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Library</title>
 </head>
+
 <body>
     <header>
         <h1>Library</h1>
     </header>
     <main>
         <div class="table">
-            <table id="booksTbl">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Pages</th>
-                    <th>Read</th>
-                </tr>
-                </table>
+            <table id="booksTbl"></table>
         </div>
         <div class="button">
             <button class="btn btn-open">+ Add book</button>
@@ -31,16 +26,18 @@
     <div class="overlay hidden"></div>
     <section class="modal hidden">
         <div class="modal-header">
-        <h4>Add a new book to your library</h4>
-        <button class="btn-close">⨉</button>
+            <h4>Add a new book to your library</h4>
+            <button class="btn-close">⨉</button>
         </div>
-        <input type="text" id="bookTitle" placeholder="Title" />
-        <input type="text" id="bookAuthor" placeholder="Author" />
-        <input type="number" id="bookPages" placeholder="# Amount of pages" />
-        <p><label for="bookIsRead">Have you read it?</label>
-        <input type="checkbox" id="bookIsRead" name="bookIsRead"></p>
-        <button class="btn btn-submit">Submit</button>
+        <form id="addBookFrm">
+            <input type="text" id="title" placeholder="Title" />
+            <input type="text" id="author" placeholder="Author" />
+            <input type="number" id="pages" placeholder="# Amount of pages" />
+            <p><label for="isRead">Have you read it? </label><input type="checkbox" id="isRead" name="isRead"></p>
+            <button class="btn btn-submit">Submit</button>
+        </form>
     </section>
 </body>
+
 </html>
 <script src="js/script.js"></script>
